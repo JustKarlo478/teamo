@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Para Mi Amor ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a8e6cf, #56ab2f);
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
+}
+.dark {
+    background: linear-gradient(135deg, #0f3823, #062d1c);
+}
+
+.header {
+    padding: 40px 20px;
+}
+.header h1 {
+    font-size: 2.6em;
+    font-weight: bold;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.heart {
+    font-size: 3.8em;
+    animation: heartbeat 1.5s infinite;
+    color: #d4ffc7;
+}
+
+button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 15px;
+    background: #2ecc71;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 80, 35, 0.35);
+}
+button:hover {
+    background: #27ae60;
+    transform: scale(1.05);
+}
+
+.card {
+    background: rgba(255,255,255,0.15);
+    padding: 25px;
+    margin: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    display: none;
+    animation: fadeIn 1s;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* RPG */
+.rpgButton {
+    background: #1e8449;
+    padding: 12px 22px;
+    font-size: 1em;
+    border-radius: 10px;
+    margin: 8px;
+}
+
+#winScreen {
+    display: none;
+    padding: 30px;
+    font-size: 1.4em;
+    border-radius: 20px;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.8s;
+}
+
+/* Animaciones */
+.star {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #d1ffd1;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fadeStar 1s linear forwards;
+}
+@keyframes fadeStar {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(2); }
+}
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="heart">💚</div>
+    <h1>Para la Persona Que Amo</h1>
+    <p>Un regalo creado para ti, mi amor ✨</p>
+</div>
+
+<!-- BOTONES -->
+<button onclick="mostrarCarta()">💌 Carta para ti</button>
+<button onclick="mostrarRazones()">🌸 Razones por las que te amo</button>
+<button onclick="mostrarContador()">⏳ Tiempo juntos</button>
+<button onclick="mostrarRPG()">⚔️ Mini RPG Romántico</button>
+<button onclick="mostrarSorpresa1()">🎁 Sorpresa 1</button>
+<button onclick="mostrarSorpresa2()">💞 Sorpresa 2</button>
+<button onclick="toggleNight()">🌙 Modo noche</button>
+
+<!-- TARJETAS -->
+<div id="carta" class="card"></div>
+<div id="razones" class="card"></div>
+<div id="contador" class="card"></div>
+
+<!-- RPG -->
+<div id="rpg" class="card"></div>
+<div id="winScreen"></div>
+
+<div id="sorpresa1" class="card"></div>
+<div id="sorpresa2" class="card"></div>
+
+<footer style="margin: 40px 0; opacity: 0.8;">Hecho con amor para ti 💚</footer>
+
+<script>
+// --------------------- CARTA ---------------------
+function mostrarCarta() {
+    mostrar("carta");
+    carta.innerHTML = `
+        <h2>💌 Mi Carta para Ti</h2>
+        <p style="font-size: 1.3em; line-height: 1.5;">
+        Amor… gracias por estos meses maravillosos desde aquel 27 de diciembre del 2024.  
+        Cada día contigo es un regalo precioso que la vida me dio.  
+        Gracias por llenar mis días de luz, por tu cariño y por tu forma tan hermosa de querer.
+        <br><br>
+        Te amo más de lo que estas palabras pueden explicar 💚
+        </p>
+        <div class="secret" onclick="mensajeSecreto()">Toca aquí para un mensaje secreto 💚</div>
+    `;
+}
+
+// --------------------- RAZONES ---------------------
+function mostrarRazones() {
+    mostrar("razones");
+    const lista = [
+        "🍃 Me haces sentir amado sin esfuerzo",
+        "💚 Eres la persona más preciosa que conozco",
+        "🌿 Tu risa es mi sonido favorito",
+        "✨ Contigo todo se siente más bonito",
+        "💞 Me inspiras a ser mejor cada día",
+        "🫶 Eres mi paz y mi lugar seguro",
+        "🌱 Cada momento contigo vale oro",
+        "🌹 Eres el regalo más bonito del destino"
+    ];
+
+    razones.innerHTML = "<h2>🌿 Razones por las que te amo</h2>";
+    lista.forEach(r => razones.innerHTML += `<div class="reason">${r}</div>`);
+}
+
+// --------------------- CONTADOR ---------------------
+function mostrarContador() {
+    mostrar("contador");
+    const inicio = new Date("2024-12-27");
+    const hoy = new Date();
+    const diff = hoy - inicio;
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const meses = (hoy.getFullYear() - inicio.getFullYear()) * 12 + (hoy.getMonth() - inicio.getMonth());
+
+    contador.innerHTML = `
+        <h2>⏳ Nuestro Tiempo Juntos</h2>
+        <p style="font-size: 1.4em;">
+        Han pasado <b>${dias}</b> días desde que empezamos nuestra historia 💚<br>
+        Ya llevamos <b>${meses}</b> meses juntos ✨
+        </p>
+    `;
+}
+
+// =============== NUEVO MINI RPG ROMÁNTICO + PANTALLA DE VICTORIA ===============
+let php = 100;
+let ehp = 70;
+
+function mostrarRPG() {
+    ocultarWinScreen();
+    mostrar("rpg");
+    php = 100;
+    ehp = 70;
+
+    rpg.innerHTML = `
+        <h2>⚔️ Mini RPG Romántico</h2>
+        <p>Derrota al “Monstruo de la Distancia” para fortalecer aún más nuestro amor 💚</p>
+
+        <p><b>Tu Vida:</b> <span id="php">${php}</span></p>
+        <p><b>Vida del Monstruo:</b> <span id="ehp">${ehp}</span></p>
+
+        <button class="rpgButton" onclick="rpgAtacar()">⚔️ Atacar</button>
+        <button class="rpgButton" onclick="rpgCurar()">💚 Curar</button>
+
+        <p id="rpgMsg" style="margin-top:15px; font-size:1.2em;"></p>
+    `;
+}
+
+function rpgAtacar() {
+    const dmg = Math.floor(Math.random() * 20) + 10;
+    ehp -= dmg;
+    if (ehp < 0) ehp = 0;
+
+    document.getElementById("ehp").innerText = ehp;
+    rpgMsg.innerHTML = `Le hiciste <b>${dmg}</b> de daño 💚`;
+
+    if (ehp <= 0) return victoriaRPG();
+
+    enemigoGolpea();
+}
+
+function rpgCurar() {
+    const heal = Math.floor(Math.random() * 20) + 10;
+    php += heal;
+    if (php > 100) php = 100;
+
+    document.getElementById("php").innerText = php;
+    rpgMsg.innerHTML = `Recuperaste <b>${heal}</b> de vida 💚`;
+
+    enemigoGolpea();
+}
+
+function enemigoGolpea() {
+    const dmg = Math.floor(Math.random() * 18) + 8;
+    php -= dmg;
+    if (php < 0) php = 0;
+
+    document.getElementById("php").innerText = php;
+
+    if (php <= 0) return derrotaRPG();
+}
+
+function victoriaRPG() {
+    mostrarWinScreen(true);
+}
+
+function derrotaRPG() {
+    mostrarWinScreen(false);
+}
+
+// ============ Pantalla de Victoria con mensajes aleatorios ============
+const mensajesAmor = [
+    "Ganaste, amor… igual que ganaste mi corazón 💚",
+    "Eres la razón de mis sonrisas más sinceras 💚",
+    "Contigo siempre gano, incluso cuando pierdo 💚",
+    "Gracias por existir tan bonito en mi vida 💚",
+    "Mi mundo es perfecto porque estás tú 💚",
+    "Eres mi tesoro más valioso 💚",
+    "Este juego lo ganaste… como ganaste mi alma 💚"
+];
+
+function mostrarWinScreen(victoria) {
+    const win = document.getElementById("winScreen");
+    const msg = victoria
+        ? mensajesAmor[Math.floor(Math.random() * mensajesAmor.length)]
+        : "Perdiste esta batalla… pero nunca perderé mis ganas de amarte 💚";
+
+    win.innerHTML = `
+        <h2>${victoria ? "🏆 ¡Victoria, Mi Amor! 🏆" : "💚 Sigue Intentándolo 💚"}</h2>
+        <p>${msg}</p>
+        <button class="rpgButton" onclick="mostrarRPG()">Volver a jugar</button>
+    `;
+
+    win.style.display = "block";
+}
+
+function ocultarWinScreen() {
+    document.getElementById("winScreen").style.display = "none";
+}
+
+// --------------------- SORPRESA 1 ---------------------
+function mostrarSorpresa1() {
+    mostrar("sorpresa1"); // Muestra correctamente la tarjeta
+    
+    // Reiniciamos el contenido siempre que se abra
+    sorpresa1.innerHTML = `
+        <h2>🎁 Sorpresa 1: Mensaje Dinámico</h2>
+        <p style="font-size:1.3em;">Cada vez que toques el botón, te diré algo bonito 💚</p>
+
+        <button onclick="mensajeRandom()" class="rpgButton">Dime algo bonito 💚</button>
+
+        <p id="mensajeRandom" style="font-size:1.4em; margin-top:15px;"></p>
+    `;
+}
+
+function mensajeRandom() {
+    const frases = [
+        "Eres el latido más bonito que tiene mi corazón 💚",
+        "Me haces feliz incluso en mis días difíciles 🌿",
+        "Gracias por ser mi lugar seguro ✨",
+        "Tu existencia hace que el mundo sea más bonito 💞",
+        "Te amo más cada día, aunque no parezca posible 🍃",
+        "Eres mi sueño hecho realidad 💚",
+        "No sabes cuánto te admiro y te valoro ✨"
+    ];
+
+    const elemento = document.getElementById("mensajeRandom");
+
+    if (elemento) {
+        elemento.innerText = frases[Math.floor(Math.random() * frases.length)];
+    }
+}
+
+
+// --------------------- SORPRESA 2 ---------------------
+function mostrarSorpresa2() {
+    mostrar("sorpresa2");
+    sorpresa2.innerHTML = `
+        <h2>💞 Sorpresa 2: Cofre del Amor</h2>
+        <p>Toca el cofre para abrirlo… 💚</p>
+        <div onclick="abrirCofre()" style="font-size:4em; cursor:pointer;">🧰</div>
+        <p id="cofreMsg" style="font-size:1.4em; margin-top:15px;"></p>
+    `;
+}
+function abrirCofre() {
+    cofreMsg.innerHTML =
+        "Dentro del cofre encontraste…<br><b>Todo mi amor para ti, hoy y siempre 💚✨</b>";
+}
+
+// --------------------- EFECTOS Y MODO NOCHE ---------------------
+function mensajeSecreto() {
+    alert("Mi secreto es que cada día te amo un poquito más 💚");
+}
+
+document.addEventListener("click", e => {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    document.body.appendChild(star);
+    star.style.left = e.clientX + "px";
+    star.style.top = e.clientY + "px";
+    setTimeout(() => star.remove(), 1000);
+});
+
+function toggleNight() {
+    document.body.classList.toggle("dark");
+}
+
+function mostrar(id) {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+</script>
+
+</body>
+</html>
+
