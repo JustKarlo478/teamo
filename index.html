@@ -19,49 +19,80 @@ body {
     background: linear-gradient(135deg, #0f3823, #062d1c);
 }
 
+/******************** NUEVO — Modo Romántico **********************/
+.romantic {
+    background: linear-gradient(135deg, #ffb7d5, #ff7aa3) !important;
+}
+
+/********************** Header ***************************/
 .header {
     padding: 40px 20px;
 }
 .header h1 {
-    font-size: 2.6em;
+    font-size: 2.8em;
     font-weight: bold;
-    text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    text-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 .heart {
-    font-size: 3.8em;
+    font-size: 4em;
     animation: heartbeat 1.5s infinite;
     color: #d4ffc7;
 }
 
+/********************** Botones ***************************/
 button {
     padding: 15px 25px;
     margin: 10px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     border: none;
     border-radius: 15px;
     background: #2ecc71;
     color: white;
     cursor: pointer;
     transition: 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 80, 35, 0.35);
+    box-shadow: 0 4px 15px rgba(0, 80, 35, 0.4);
+    position: relative;
+    overflow: hidden;
 }
 button:hover {
     background: #27ae60;
-    transform: scale(1.05);
+    transform: scale(1.06);
+}
+button::after {
+    /* brillo */
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+button:hover::after {
+    opacity: 1;
 }
 
+/********************** Tarjetas ***************************/
 .card {
     background: rgba(255,255,255,0.15);
-    padding: 25px;
-    margin: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(6px);
+    padding: 30px;
+    margin: 25px auto;
+    width: 85%;
+    border-radius: 25px;
+    backdrop-filter: blur(8px);
     display: none;
-    animation: fadeIn 1s;
+    animation: fadeIn 0.8s;
     border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
 }
 
-/* RPG */
+/********************** RPG Botón ***********************/
 .rpgButton {
     background: #1e8449;
     padding: 12px 22px;
@@ -70,27 +101,31 @@ button:hover {
     margin: 8px;
 }
 
-#winScreen {
-    display: none;
-    padding: 30px;
-    font-size: 1.4em;
-    border-radius: 20px;
-    margin-top: 20px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(6px);
-    animation: fadeIn 0.8s;
+/********************** Animaciones ***************************/
+.star, .heartFloat {
+    position: absolute;
+    pointer-events: none;
 }
 
-/* Animaciones */
 .star {
-    position: absolute;
     width: 8px;
     height: 8px;
     background: #d1ffd1;
     border-radius: 50%;
-    pointer-events: none;
     animation: fadeStar 1s linear forwards;
 }
+
+.heartFloat {
+    font-size: 1.6em;
+    animation: floatUp 3s linear forwards;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(-80px); opacity: 0; }
+}
+
 @keyframes fadeStar {
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(2); }
@@ -124,22 +159,26 @@ button:hover {
 <button onclick="mostrarSorpresa2()">💞 Sorpresa 2</button>
 <button onclick="toggleNight()">🌙 Modo noche</button>
 
+<!-- 🌟 NUEVO BOTÓN ROMÁNTICO -->
+<button onclick="mostrarPoema()">💖 Modo Poema Infinito</button>
+
 <!-- TARJETAS -->
 <div id="carta" class="card"></div>
 <div id="razones" class="card"></div>
 <div id="contador" class="card"></div>
-
-<!-- RPG -->
 <div id="rpg" class="card"></div>
-<div id="winScreen"></div>
-
+<div id="winScreen" class="card"></div>
 <div id="sorpresa1" class="card"></div>
 <div id="sorpresa2" class="card"></div>
+
+<!-- NUEVO — POEMA INFINITO -->
+<div id="poema" class="card"></div>
 
 <footer style="margin: 40px 0; opacity: 0.8;">Hecho con amor para ti 💚</footer>
 
 <script>
-// --------------------- CARTA ---------------------
+
+/******************** Carta ********************/
 function mostrarCarta() {
     mostrar("carta");
     carta.innerHTML = `
@@ -151,11 +190,11 @@ function mostrarCarta() {
         <br><br>
         Te amo más de lo que estas palabras pueden explicar 💚
         </p>
-        <div class="secret" onclick="mensajeSecreto()">Toca aquí para un mensaje secreto 💚</div>
+        <div class="secret" onclick="mensajeSecreto()" style="cursor:pointer; margin-top:20px;">Toca aquí para un mensaje secreto 💚</div>
     `;
 }
 
-// --------------------- RAZONES ---------------------
+/******************** Razones ********************/
 function mostrarRazones() {
     mostrar("razones");
     const lista = [
@@ -170,10 +209,10 @@ function mostrarRazones() {
     ];
 
     razones.innerHTML = "<h2>🌿 Razones por las que te amo</h2>";
-    lista.forEach(r => razones.innerHTML += `<div class="reason">${r}</div>`);
+    lista.forEach(r => razones.innerHTML += `<div class="reason" style="margin:6px 0; font-size:1.25em;">${r}</div>`);
 }
 
-// --------------------- CONTADOR ---------------------
+/******************** Contador ********************/
 function mostrarContador() {
     mostrar("contador");
     const inicio = new Date("2024-12-27");
@@ -192,7 +231,7 @@ function mostrarContador() {
     `;
 }
 
-// =============== NUEVO MINI RPG ROMÁNTICO + PANTALLA DE VICTORIA ===============
+/******************** RPG ********************/
 let php = 100;
 let ehp = 70;
 
@@ -258,7 +297,6 @@ function derrotaRPG() {
     mostrarWinScreen(false);
 }
 
-// ============ Pantalla de Victoria con mensajes aleatorios ============
 const mensajesAmor = [
     "Ganaste, amor… igual que ganaste mi corazón 💚",
     "Eres la razón de mis sonrisas más sinceras 💚",
@@ -280,7 +318,6 @@ function mostrarWinScreen(victoria) {
         <p>${msg}</p>
         <button class="rpgButton" onclick="mostrarRPG()">Volver a jugar</button>
     `;
-
     win.style.display = "block";
 }
 
@@ -288,18 +325,16 @@ function ocultarWinScreen() {
     document.getElementById("winScreen").style.display = "none";
 }
 
-// --------------------- SORPRESA 1 ---------------------
+/******************** Sorpresa 1 ********************/
 function mostrarSorpresa1() {
-    mostrar("sorpresa1"); // Muestra correctamente la tarjeta
-    
-    // Reiniciamos el contenido siempre que se abra
+    mostrar("sorpresa1");
     sorpresa1.innerHTML = `
         <h2>🎁 Sorpresa 1: Mensaje Dinámico</h2>
         <p style="font-size:1.3em;">Cada vez que toques el botón, te diré algo bonito 💚</p>
 
         <button onclick="mensajeRandom()" class="rpgButton">Dime algo bonito 💚</button>
 
-        <p id="mensajeRandom" style="font-size:1.4em; margin-top:15px;"></p>
+        <p id="msgRandom" style="font-size:1.4em; margin-top:15px;"></p>
     `;
 }
 
@@ -314,15 +349,10 @@ function mensajeRandom() {
         "No sabes cuánto te admiro y te valoro ✨"
     ];
 
-    const elemento = document.getElementById("mensajeRandom");
-
-    if (elemento) {
-        elemento.innerText = frases[Math.floor(Math.random() * frases.length)];
-    }
+    const elemento = document.getElementById("msgRandom");
+    elemento.innerText = frases[Math.floor(Math.random() * frases.length)];
 }
-
-
-// --------------------- SORPRESA 2 ---------------------
+/******************** Sorpresa 2 ********************/
 function mostrarSorpresa2() {
     mostrar("sorpresa2");
     sorpresa2.innerHTML = `
@@ -337,7 +367,53 @@ function abrirCofre() {
         "Dentro del cofre encontraste…<br><b>Todo mi amor para ti, hoy y siempre 💚✨</b>";
 }
 
-// --------------------- EFECTOS Y MODO NOCHE ---------------------
+/******************** NUEVO — POEMA INFINITO ********************/
+let poemaInterval;
+
+function mostrarPoema() {
+    mostrar("poema");
+
+    const versos = [
+        "Tú eres la razón por la que sonrío sin querer 💗",
+        "Tu voz es el refugio donde mi alma descansa 🌙",
+        "Amarte es el regalo más hermoso que me dio la vida ✨",
+        "Si existieras en otra vida, también te elegiría 💞",
+        "Tu mirada es el lugar donde me siento en casa 🌸",
+        "Eres mi sueño favorito hecho persona 💖",
+        "Tú eres poesía aunque no lo notes 💗"
+    ];
+
+    poema.innerHTML = `
+        <h2>💖 Poema Infinito</h2>
+        <p id="versoActual" style="font-size:1.6em; margin-top:20px;"></p>
+        <button onclick="detenerPoema()" class="rpgButton" style="margin-top:20px;">Detener</button>
+    `;
+
+    let i = 0;
+
+    clearInterval(poemaInterval); 
+    poemaInterval = setInterval(() => {
+        versoActual.innerHTML = versos[i];
+
+        // corazones flotando
+        const heart = document.createElement("div");
+        heart.classList.add("heartFloat");
+        heart.innerHTML = "💖";
+        heart.style.left = (Math.random() * window.innerWidth) + "px";
+        heart.style.top = "80%";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+
+        i = (i + 1) % versos.length;
+    }, 2600);
+}
+
+function detenerPoema() {
+    clearInterval(poemaInterval);
+    versoActual.innerHTML = "Poema pausado… pero mi amor por ti nunca ✨💗";
+}
+
+/******************** Extras ********************/
 function mensajeSecreto() {
     alert("Mi secreto es que cada día te amo un poquito más 💚");
 }
@@ -352,15 +428,18 @@ document.addEventListener("click", e => {
 });
 
 function toggleNight() {
+    if (document.body.classList.contains("romantic")) {
+        document.body.classList.remove("romantic");
+    }
     document.body.classList.toggle("dark");
 }
 
 function mostrar(id) {
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    document.body.classList.remove("romantic");
     document.getElementById(id).style.display = "block";
 }
 </script>
 
 </body>
 </html>
-
