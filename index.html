@@ -6,7 +6,7 @@
 <title>Para Mi Amor ❤️</title>
 
 <style>
-body {
+    body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #a8e6cf, #56ab2f);
@@ -15,11 +15,12 @@ body {
     overflow-x: hidden;
     transition: background 0.5s ease;
 }
+
 .dark {
     background: linear-gradient(135deg, #0f3823, #062d1c);
 }
 
-/******************** NUEVO — Modo Romántico **********************/
+/******************** MODO ROMÁNTICO **********************/
 .romantic {
     background: linear-gradient(135deg, #ffb7d5, #ff7aa3) !important;
 }
@@ -100,7 +101,7 @@ button:hover::after {
     margin: 8px;
 }
 
-/********************** Animaciones ***************************/
+/********************** Animaciones Estrella & Corazones ***********************/
 .star, .heartFloat {
     position: absolute;
     pointer-events: none;
@@ -115,56 +116,189 @@ button:hover::after {
 }
 
 .heartFloat {
-    font-size: 1.6em;
+    position: absolute;
+    pointer-events: none;
     animation: floatUp 3s linear forwards;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 @keyframes floatUp {
     from { transform: translateY(0); opacity: 1; }
-    to   { transform: translateY(-80px); opacity: 0; }
+    to   { transform: translateY(-100px) rotate(20deg); opacity: 0; }
 }
+
 
 @keyframes fadeStar {
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(2); }
 }
+
 @keyframes heartbeat {
     0% { transform: scale(1); }
     50% { transform: scale(1.25); }
     100% { transform: scale(1); }
 }
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(25px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/*************** ⭐ NUEVO — Constelación del Amor *****************/
-.constelacionCanvas {
+/********************** CONSTELACIÓN DEL AMOR **********************/
+
+.constellation-container {
+    position: relative;
     width: 100%;
     height: 300px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
-.stella {
+.const-star {
+    width: 10px;
+    height: 10px;
+    background: #fff8c6;
+    border-radius: 50%;
     position: absolute;
+    box-shadow: 0 0 12px #fff8c6;
+    animation: pulseStar 2s infinite;
+}
+
+@keyframes pulseStar {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.5); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+.const-line {
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+}
+
+/********************** JARDÍN QUE FLORECE **********************/
+.flower {
+    font-size: 2.2em;
+    position: absolute;
+    animation: growFlower 3s forwards;
+}
+
+@keyframes growFlower {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/********************** FUEGOS ARTIFICIALES **********************/
+.firework, .spark, .heartSpark {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.spark {
     width: 6px;
     height: 6px;
-    background: white;
-    border-radius: 50%;
-    animation: parpadeo 2s infinite;
 }
 
-@keyframes parpadeo {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
+.heartSpark {
+    font-size: 18px;
+    color: pink;
 }
+
+
+/* Carta secreta */
+#cartaSecreta {
+    background: rgba(255, 192, 203, 0.2);
+    border: 1px solid rgba(255, 105, 180, 0.4);
+}
+.letter {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 5px;
+    font-size: 2em;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.letter:hover {
+    transform: scale(1.2);
+}
+#mazeContainer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    border: 3px solid #fff;
+    background: rgba(255,255,255,0.1);
+}
+
+.wall {
+    position: absolute;
+    background: #ff7aa3;
+}
+
+#player {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: red;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    font-size: 1em;
+    color: white;
+}
+
+#goal {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: pink;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1em;
+    color: white;
+}
+
+/* Controles táctiles */
+#controls {
+    width: 220px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(2, 70px);
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+.controlBtn {
+    width: 60px;
+    height: 60px;
+    background: #ff7aa3;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controlBtn:active {
+    transform: scale(0.9);
+}
+
+
 </style>
+
 </head>
 
 <body>
@@ -183,12 +317,12 @@ button:hover::after {
 <button onclick="mostrarSorpresa1()">🎁 Sorpresa 1</button>
 <button onclick="mostrarSorpresa2()">💞 Sorpresa 2</button>
 <button onclick="toggleNight()">🌙 Modo noche</button>
-
-<!-- NUEVO -->
 <button onclick="mostrarPoema()">💖 Modo Poema Infinito</button>
-
-<!-- ⭐ NUEVO — Constelación del Amor -->
 <button onclick="mostrarConstelacion()">✨ Constelación del Amor</button>
+<button onclick="mostrarJardin()">🌸 Jardín que Florece</button>
+<button onclick="mostrarCartaSecreta()">🔐 Carta Secreta</button>
+<button onclick="mostrarRompecabezas()">🧩 Rompecabezas de Letras</button>
+<button onclick="mostrarLaberinto()">🌀 Mini Laberinto del Corazón</button>
 
 <!-- TARJETAS -->
 <div id="carta" class="card"></div>
@@ -199,13 +333,22 @@ button:hover::after {
 <div id="sorpresa1" class="card"></div>
 <div id="sorpresa2" class="card"></div>
 <div id="poema" class="card"></div>
-
-<!-- NUEVA TARJETA -->
 <div id="constelacion" class="card"></div>
+<div id="jardin" class="card"></div>
+<div id="cartaSecreta" class="card"></div>
+<div id="rompecabezas" class="card"></div>
+<div id="laberinto" class="card"></div>
+
 
 <footer style="margin: 40px 0; opacity: 0.8;">Hecho con amor para ti 💚</footer>
 
 <script>
+    /******************** Mostrar tarjetas ********************/
+function mostrar(id) {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    document.body.classList.remove("romantic");
+    document.getElementById(id).style.display = "block";
+}
 
 /******************** Carta ********************/
 function mostrarCarta() {
@@ -238,7 +381,7 @@ function mostrarRazones() {
     ];
 
     razones.innerHTML = "<h2>🌿 Razones por las que te amo</h2>";
-    lista.forEach(r => razones.innerHTML += `<div class="reason" style="margin:6px 0; font-size:1.25em;">${r}</div>`);
+    lista.forEach(r => razones.innerHTML += `<div style="margin:6px 0; font-size:1.25em;">${r}</div>`);
 }
 
 /******************** Contador ********************/
@@ -293,7 +436,6 @@ function rpgAtacar() {
     rpgMsg.innerHTML = `Le hiciste <b>${dmg}</b> de daño 💚`;
 
     if (ehp <= 0) return victoriaRPG();
-
     enemigoGolpea();
 }
 
@@ -314,54 +456,41 @@ function enemigoGolpea() {
     if (php < 0) php = 0;
 
     document.getElementById("php").innerText = php;
-
     if (php <= 0) return derrotaRPG();
 }
 
-function victoriaRPG() {
-    mostrarWinScreen(true);
-}
-
-function derrotaRPG() {
-    mostrarWinScreen(false);
-}
+function victoriaRPG() { mostrarWinScreen(true); }
+function derrotaRPG() { mostrarWinScreen(false); }
 
 const mensajesAmor = [
     "Ganaste, amor… igual que ganaste mi corazón 💚",
     "Eres la razón de mis sonrisas más sinceras 💚",
     "Contigo siempre gano, incluso cuando pierdo 💚",
-    "Gracias por existir tan bonito en mi vida 💚",
     "Mi mundo es perfecto porque estás tú 💚",
-    "Eres mi tesoro más valioso 💚",
     "Este juego lo ganaste… como ganaste mi alma 💚"
 ];
 
 function mostrarWinScreen(victoria) {
-    const win = document.getElementById("winScreen");
-    const msg = victoria
-        ? mensajesAmor[Math.floor(Math.random() * mensajesAmor.length)]
-        : "Perdiste esta batalla… pero nunca perderé mis ganas de amarte 💚";
-
-    win.innerHTML = `
+    winScreen.innerHTML = `
         <h2>${victoria ? "🏆 ¡Victoria, Mi Amor! 🏆" : "💚 Sigue Intentándolo 💚"}</h2>
-        <p>${msg}</p>
+        <p>${victoria ? mensajesAmor[Math.floor(Math.random()*mensajesAmor.length)] : "Perdiste… pero nunca perderé mis ganas de amarte 💚"}</p>
         <button class="rpgButton" onclick="mostrarRPG()">Volver a jugar</button>
     `;
-    win.style.display = "block";
+    winScreen.style.display = "block";
 }
 
 function ocultarWinScreen() {
-    document.getElementById("winScreen").style.display = "none";
+    winScreen.style.display = "none";
 }
 
 /******************** Sorpresa 1 ********************/
 function mostrarSorpresa1() {
     mostrar("sorpresa1");
     sorpresa1.innerHTML = `
-        <h2>🎁 Sorpresa 1: Mensaje Dinámico</h2>
-        <p style="font-size:1.3em;">Cada vez que toques el botón, te diré algo bonito 💚</p>
+        <h2>🎁 Sorpresa 1</h2>
+        <p style="font-size:1.3em;">Presiona para leer algo bonito 💚</p>
 
-        <button onclick="mensajeRandom()" class="rpgButton">Dime algo bonito 💚</button>
+        <button onclick="mensajeRandom()" class="rpgButton">💚</button>
 
         <p id="msgRandom" style="font-size:1.4em; margin-top:15px;"></p>
     `;
@@ -369,35 +498,31 @@ function mostrarSorpresa1() {
 
 function mensajeRandom() {
     const frases = [
-        "Eres el latido más bonito que tiene mi corazón 💚",
-        "Me haces feliz incluso en mis días difíciles 🌿",
-        "Gracias por ser mi lugar seguro ✨",
-        "Tu existencia hace que el mundo sea más bonito 💞",
-        "Te amo más cada día, aunque no parezca posible 🍃",
-        "Eres mi sueño hecho realidad 💚",
-        "No sabes cuánto te admiro y te valoro ✨"
+        "Eres el latido más dulce de mi vida 💚",
+        "Tu sonrisa me cura el alma 🌿",
+        "Gracias por existir con tanta magia ✨",
+        "Te amo más de lo que mi voz podría decir 💞"
     ];
 
-    const elemento = document.getElementById("msgRandom");
-    elemento.innerText = frases[Math.floor(Math.random() * frases.length)];
+    msgRandom.innerText = frases[Math.floor(Math.random() * frases.length)];
 }
 
 /******************** Sorpresa 2 ********************/
 function mostrarSorpresa2() {
     mostrar("sorpresa2");
     sorpresa2.innerHTML = `
-        <h2>💞 Sorpresa 2: Cofre del Amor</h2>
-        <p>Toca el cofre para abrirlo… 💚</p>
+        <h2>💞 Cofre del Amor</h2>
+        <p>Toca el cofre… 💚</p>
         <div onclick="abrirCofre()" style="font-size:4em; cursor:pointer;">🧰</div>
         <p id="cofreMsg" style="font-size:1.4em; margin-top:15px;"></p>
     `;
 }
+
 function abrirCofre() {
-    cofreMsg.innerHTML =
-        "Dentro del cofre encontraste…<br><b>Todo mi amor para ti, hoy y siempre 💚✨</b>";
+    cofreMsg.innerHTML = "Dentro del cofre encontraste…<br><b>Todo mi amor para ti 💚✨</b>";
 }
 
-/******************** NUEVO — POEMA INFINITO ********************/
+/******************** Poema Infinito ********************/
 let poemaInterval;
 
 function mostrarPoema() {
@@ -405,30 +530,28 @@ function mostrarPoema() {
 
     const versos = [
         "Tú eres la razón por la que sonrío sin querer 💗",
-        "Tu voz es el refugio donde mi alma descansa 🌙",
-        "Amarte es el regalo más hermoso que me dio la vida ✨",
-        "Si existieras en otra vida, también te elegiría 💞",
-        "Tu mirada es el lugar donde me siento en casa 🌸",
-        "Eres mi sueño favorito hecho persona 💖",
-        "Tú eres poesía aunque no lo notes 💗"
+        "Si existieras en otra vida, también te elegiría 🌙",
+        "Tu mirada es donde me siento en casa ✨",
+        "Eres poesía sin darte cuenta 💖",
+        "Amarte es mi lugar favorito 💗"
     ];
 
     poema.innerHTML = `
         <h2>💖 Poema Infinito</h2>
         <p id="versoActual" style="font-size:1.6em; margin-top:20px;"></p>
-        <button onclick="detenerPoema()" class="rpgButton" style="margin-top:20px;">Detener</button>
+        <button onclick="detenerPoema()" class="rpgButton">Detener</button>
     `;
 
     let i = 0;
+    clearInterval(poemaInterval);
 
-    clearInterval(poemaInterval); 
     poemaInterval = setInterval(() => {
         versoActual.innerHTML = versos[i];
 
         const heart = document.createElement("div");
         heart.classList.add("heartFloat");
         heart.innerHTML = "💖";
-        heart.style.left = (Math.random() * window.innerWidth) + "px";
+        heart.style.left = (Math.random()*window.innerWidth) + "px";
         heart.style.top = "80%";
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 3000);
@@ -439,63 +562,18 @@ function mostrarPoema() {
 
 function detenerPoema() {
     clearInterval(poemaInterval);
-    versoActual.innerHTML = "Poema pausado… pero mi amor por ti nunca ✨💗";
+    versoActual.innerHTML = "Poema pausado… pero mi amor jamás 💗";
 }
 
-/******************** ⭐ NUEVO — Constelación del Amor ********************/
-function mostrarConstelacion() {
-    mostrar("constelacion");
-
-    constelacion.innerHTML = `
-        <h2>✨ Constelación del Amor</h2>
-        <p style="font-size:1.3em;">
-            Cada estrella aquí representa un “te amo” que guardo por ti en mi cielo personal 💚
-        </p>
-        <div class="constelacionCanvas" id="canvasConst"></div>
-    `;
-
-    generarEstrellas();
-}
-
-function generarEstrellas() {
-    const canvas = document.getElementById("canvasConst");
-    canvas.innerHTML = "";
-
-    const mensaje = "TE AMO";
-    const ancho = canvas.offsetWidth;
-    const alto = canvas.offsetHeight;
-
-    for (let i = 0; i < 40; i++) {
-        const star = document.createElement("div");
-        star.classList.add("stella");
-        star.style.left = Math.random() * ancho + "px";
-        star.style.top = Math.random() * alto + "px";
-        canvas.appendChild(star);
+/******************** Modo Noche ********************/
+function toggleNight() {
+    if (document.body.classList.contains("romantic")) {
+        document.body.classList.remove("romantic");
     }
-
-    const letras = mensaje.split("");
-    let xBase = 40;
-
-    letras.forEach((l, index) => {
-        for (let i = 0; i < 8; i++) {
-            const star = document.createElement("div");
-            star.classList.add("stella");
-            star.style.left = xBase + (Math.random()*30) + "px";
-            star.style.top = 80 + (Math.random()*40) + "px";
-            star.style.background = "#ffb7d5";
-            star.style.animationDuration = (1 + Math.random()) + "s";
-
-            canvas.appendChild(star);
-        }
-        xBase += 60;
-    });
+    document.body.classList.toggle("dark");
 }
 
-/******************** Extras ********************/
-function mensajeSecreto() {
-    alert("Mi secreto es que cada día te amo un poquito más 💚");
-}
-
+/******************** Estrellas al hacer clic ********************/
 document.addEventListener("click", e => {
     const star = document.createElement("div");
     star.classList.add("star");
@@ -505,19 +583,459 @@ document.addEventListener("click", e => {
     setTimeout(() => star.remove(), 1000);
 });
 
-function toggleNight() {
-    if (document.body.classList.contains("romantic")) {
-        document.body.classList.remove("romantic");
-    }
-    document.body.classList.toggle("dark");
+/******************** Mensaje Secreto ********************/
+function mensajeSecreto() {
+    alert("Mi secreto es que cada día te amo un poquito más 💚");
 }
 
-function mostrar(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.body.classList.remove("romantic");
-    document.getElementById(id).style.display = "block";
+/******************** CONSTELACIÓN DEL AMOR ********************/
+function mostrarConstelacion() {
+    mostrar("constelacion");
+
+    constelacion.innerHTML = `
+        <h2>✨ Constelación del Amor</h2>
+        <p>Nuestras estrellas siempre estarán unidas 💚</p>
+        <div class="constellation-container" id="constContainer"></div>
+    `;
+
+    const cont = document.getElementById("constContainer");
+    cont.innerHTML = "";
+
+    const stars = [
+        {x: 20, y: 50}, {x: 40, y: 30}, {x: 60, y: 60},
+        {x: 80, y: 40}, {x: 50, y: 80}
+    ];
+
+    stars.forEach(s => {
+        const star = document.createElement("div");
+        star.classList.add("const-star");
+        star.style.left = s.x + "%";
+        star.style.top = s.y + "%";
+        cont.appendChild(star);
+    });
+
+    for (let i = 0; i < stars.length - 1; i++) {
+        const line = document.createElement("div");
+        line.classList.add("const-line");
+        const dx = stars[i+1].x - stars[i].x;
+        const dy = stars[i+1].y - stars[i].y;
+        const length = Math.sqrt(dx*dx + dy*dy);
+        line.style.width = length + "%";
+        line.style.left = stars[i].x + "%";
+        line.style.top = stars[i].y + "%";
+        line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+        cont.appendChild(line);
+    }
 }
+
+/******************** JARDÍN QUE FLORECE ********************/
+function mostrarJardin() {
+    mostrar("jardin");
+
+    jardin.innerHTML = `
+        <h2>🌸 Jardín que Florece</h2>
+        <p>Así florece mi amor por ti, cada día 💚</p>
+        <div id="gardenArea" style="position:relative; height:300px;"></div>
+    `;
+
+    const garden = document.getElementById("gardenArea");
+    garden.innerHTML = "";
+
+    const flowers = ["🌸","🌺","🌼","🌷","💮","🌻"];
+
+    for (let i = 0; i < 20; i++) {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+        flower.style.left = (Math.random()*90)+"%";
+        flower.style.top = (Math.random()*80)+"%";
+        garden.appendChild(flower);
+    }
+}
+
+/******************** FUEGOS ARTIFICIALES ********************/
+function crearFuegosArtificiales(x, y) {
+    const colors = ["#FF4B5C","#FFB400","#6A0572","#1ABC9C","#FF6F61","#FFC0CB"];
+    
+    for(let i=0; i<30; i++){
+        // Partículas normales
+        const spark = document.createElement("div");
+        spark.className = "spark";
+        spark.style.background = colors[Math.floor(Math.random()*colors.length)];
+        spark.style.left = x + "px";
+        spark.style.top = y + "px";
+
+        document.body.appendChild(spark);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 100 + 50;
+
+        setTimeout(() => {
+            spark.style.transform = `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px) scale(0.5)`;
+            spark.style.opacity = 0;
+        }, 50);
+
+        setTimeout(() => spark.remove(), 1200);
+
+        // Partículas en forma de corazón
+        if(Math.random() < 0.3){
+            const heart = document.createElement("div");
+            heart.className = "heartSpark";
+            heart.innerHTML = "💖";
+            heart.style.left = x + "px";
+            heart.style.top = y + "px";
+
+            document.body.appendChild(heart);
+
+            const angleH = Math.random() * 2 * Math.PI;
+            const distanceH = Math.random() * 80 + 30;
+
+            setTimeout(() => {
+                heart.style.transform = `translate(${Math.cos(angleH)*distanceH}px, ${Math.sin(angleH)*distanceH}px) scale(0.5)`;
+                heart.style.opacity = 0;
+            }, 50);
+
+            setTimeout(() => heart.remove(), 1200);
+        }
+    }
+}
+
+// Para probar: clic en cualquier lugar
+document.addEventListener("click", e => {
+    crearFuegosArtificiales(e.clientX, e.clientY);
+});
+
+
+/******************** Carta Secreta ********************/
+function mostrarCartaSecreta() {
+    mostrar("cartaSecreta");
+
+    cartaSecreta.innerHTML = `
+        <h2>🔐 Carta Secreta</h2>
+        <p>Ingresa la contraseña para leer tu mensaje secreto 💚</p>
+        <input type="password" id="clave" placeholder="Escribe la contraseña aquí" style="padding:10px; font-size:1.2em; border-radius:10px; border:none;">
+        <button onclick="revisarClave()" class="rpgButton" style="margin-top:15px;">Abrir Carta</button>
+        <p id="msgSecreto" style="font-size:1.3em; margin-top:15px;"></p>
+    `;
+}
+
+function revisarClave() {
+    const clave = document.getElementById("clave").value.toLowerCase();
+    const msg = document.getElementById("msgSecreto");
+
+    if(clave === "27122025") {
+        msg.innerHTML = `
+            💌 ¡Felicidades! Has abierto la carta secreta.<br><br>
+            Amor mío, cada día que pasa te amo más.<br>
+            Eres la persona más maravillosa de mi vida 💚✨
+        `;
+    } else {
+        msg.innerHTML = "❌ Contraseña incorrecta… intenta de nuevo 💔";
+
+        // Crear corazones rotos animados
+        for(let i=0; i<5; i++) {
+            const heart = document.createElement("div");
+            heart.classList.add("heartFloat");
+            heart.innerHTML = "💔";
+            heart.style.left = (Math.random() * window.innerWidth) + "px";
+            heart.style.top = "80%";
+            heart.style.fontSize = (20 + Math.random()*30) + "px";
+            heart.style.color = "rgba(255, 0, 0, 0.8)";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2500);
+        }
+    }
+}
+function mostrarRompecabezas() {
+    mostrar("rompecabezas");
+
+    const nombre = "ANITAYMICRICRI"; // Cambia por el nombre de la persona
+    const letras = nombre.split("");
+    const letrasDesordenadas = [...letras].sort(() => Math.random() - 0.5);
+
+    rompecabezas.innerHTML = `
+        <h2>🧩 Rompecabezas de Letras</h2>
+        <p>Arma el nombre correcto para desbloquear la sorpresa 💖</p>
+        <div id="letrasContainer"></div>
+        <p id="msgRompecabezas" style="font-size:1.3em; margin-top:15px;"></p>
+    `;
+
+    const container = document.getElementById("letrasContainer");
+    container.innerHTML = ""; // limpiar letras viejas
+    letrasDesordenadas.forEach(letra => {
+        const span = document.createElement("span");
+        span.className = "letter";
+        span.innerText = letra;
+        span.addEventListener("click", () => seleccionarLetra(span, letras));
+        container.appendChild(span);
+    });
+
+    // Reiniciar estado
+    window.letrasSeleccionadas = [];
+}
+
+function seleccionarLetra(elemento, letrasCorrectas) {
+    window.letrasSeleccionadas.push(elemento.innerText);
+    elemento.style.visibility = "hidden";
+
+    const msg = document.getElementById("msgRompecabezas");
+
+    if(window.letrasSeleccionadas.length === letrasCorrectas.length){
+        const intento = window.letrasSeleccionadas.join("");
+        if(intento === letrasCorrectas.join("")){
+            msg.innerHTML = "💖 ¡Correcto! Has completado el rompecabezas mi amor 💖";
+            // Fuegos artificiales románticos al completar
+            const centerX = window.innerWidth/2;
+            const centerY = window.innerHeight/2;
+            crearFuegosArtificiales(centerX, centerY);
+        } else {
+            msg.innerHTML = "❌ No es correcto… intenta de nuevo 💔";
+            mostrarCorazonesRotos(5);
+            // Reiniciar letras sin recargar todo
+            setTimeout(() => reiniciarLetras(letrasCorrectas), 1200);
+        }
+    }
+}
+
+function reiniciarLetras(letrasCorrectas){
+    const container = document.getElementById("letrasContainer");
+    window.letrasSeleccionadas = [];
+    container.innerHTML = "";
+
+    const letrasDesordenadas = [...letrasCorrectas].sort(() => Math.random() - 0.5);
+    letrasDesordenadas.forEach(letra => {
+        const span = document.createElement("span");
+        span.className = "letter";
+        span.innerText = letra;
+        span.addEventListener("click", () => seleccionarLetra(span, letrasCorrectas));
+        container.appendChild(span);
+    });
+
+    document.getElementById("msgRompecabezas").innerText = "";
+}
+
+function mostrarCorazonesRotos(cantidad){
+    for(let i=0; i<cantidad; i++){
+        const heart = document.createElement("div");
+        heart.classList.add("heartFloat");
+        heart.innerHTML = "💔";
+        heart.style.left = (Math.random() * window.innerWidth) + "px";
+        heart.style.top = "80%";
+        heart.style.fontSize = (20 + Math.random()*30) + "px";
+        heart.style.color = "rgba(255, 0, 0, 0.8)";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2500);
+    }
+}
+function mostrarLaberinto() {
+    mostrar("laberinto");
+
+    laberinto.innerHTML = `
+        <h2>🌀 Laberinto del Amor</h2>
+        <p>Elige la dificultad:</p>
+        <button id="easyBtn" class="rpgButton">Fácil</button>
+        <button id="hardBtn" class="rpgButton">Difícil</button>
+        <div id="mazeContainer" style="position:relative; width:300px; height:300px; margin:20px auto; background:#fff0f5; border:2px solid #ff77aa; overflow:hidden;"></div>
+        <div id="controls" style="text-align:center; margin-top:10px;">
+            <button class="controlBtn" data-dir="up">⬆️</button><br>
+            <button class="controlBtn" data-dir="left">⬅️</button>
+            <button class="controlBtn" data-dir="down">⬇️</button>
+            <button class="controlBtn" data-dir="right">➡️</button>
+        </div>
+        <p id="laberintoMsg" style="font-size:1.3em; margin-top:15px;"></p>
+    `;
+
+    const maze = document.getElementById("mazeContainer");
+    const mazeMsg = document.getElementById("laberintoMsg");
+
+    let wallsElements = [];
+    let player, goal;
+    const speed = 5;
+    let walls = [];
+
+    function crearMaze(dificultad) {
+        maze.innerHTML = "";
+        wallsElements = [];
+
+        // Paredes base pasables
+        walls = [
+            {x:50, y:0, w:10, h:100},
+            {x:50, y:120, w:10, h:180},
+            {x:100, y:50, w:150, h:10},
+            {x:100, y:200, w:200, h:10},
+            {x:0, y:250, w:150, h:10},
+            {x:150, y:150, w:10, h:100},
+        ];
+
+        if(dificultad === "hard"){
+            walls.push(
+                {x:200, y:0, w:10, h:80},
+                {x:200, y:100, w:10, h:40},
+                {x:250, y:50, w:10, h:60},
+                {x:120, y:100, w:10, h:30},
+                {x:80, y:180, w:50, h:10}
+            );
+        }
+
+        // Crear paredes y añadir flores decorativas
+        walls.forEach(w => {
+            const wall = document.createElement("div");
+            wall.style.position = "absolute";
+            wall.style.left = w.x + "px";
+            wall.style.top = w.y + "px";
+            wall.style.width = w.w + "px";
+            wall.style.height = w.h + "px";
+            wall.style.background = "#ff77aa";
+            wall.style.borderRadius = "4px";
+            maze.appendChild(wall);
+            wallsElements.push(wall);
+
+            // Añadir flor decorativa
+            const flower = document.createElement("div");
+            flower.innerHTML = "🌸";
+            flower.style.position = "absolute";
+            flower.style.left = (w.x + Math.random() * w.w) + "px";
+            flower.style.top = (w.y + Math.random() * w.h) + "px";
+            flower.style.fontSize = "1.2em";
+            maze.appendChild(flower);
+        });
+
+        // Jugador
+        player = document.createElement("div");
+        player.innerHTML = "❤️";
+        player.style.position = "absolute";
+        player.style.left = "2px";
+        player.style.top = "2px";
+        player.style.fontSize = "1.5em";
+        player.style.width = "2px";
+        player.style.height = "2px";
+        player.style.lineHeight = "2px";
+        player.style.textAlign = "center";
+        maze.appendChild(player);
+
+        // Meta
+        goal = document.createElement("div");
+        goal.innerHTML = "💚";
+        goal.style.position = "absolute";
+        goal.style.left = "260px";
+        goal.style.top = "260px";
+        goal.style.fontSize = "1.5em";
+        maze.appendChild(goal);
+
+        mazeMsg.innerHTML = "💖 Lleva el corazón rojo hasta el verde entre las flores 🌸";
+    }
+
+    function mover(dx, dy){
+        let newX = player.offsetLeft + dx;
+        let newY = player.offsetTop + dy;
+
+        if(newX < 0) newX = 0;
+        if(newY < 0) newY = 0;
+        if(newX > maze.offsetWidth - parseInt(player.style.width)) newX = maze.offsetWidth - parseInt(player.style.width);
+        if(newY > maze.offsetHeight - parseInt(player.style.height)) newY = maze.offsetHeight - parseInt(player.style.height);
+
+        let collision = false;
+        wallsElements.forEach(w => {
+            const wRect = w.getBoundingClientRect();
+            const mazeRect = maze.getBoundingClientRect();
+            const pRect = {
+                left: newX + mazeRect.left,
+                top: newY + parseInt(player.style.height)/2 + mazeRect.top,
+                right: newX + parseInt(player.style.width)/2 + mazeRect.left,
+                bottom: newY + parseInt(player.style.height)/2 + mazeRect.top
+            };
+            if(pRect.right > wRect.left && pRect.left < wRect.right &&
+               pRect.bottom > wRect.top && pRect.top < wRect.bottom){
+                collision = true;
+            }
+        });
+
+        if(!collision){
+            player.style.left = newX + "px";
+            player.style.top = newY + "px";
+
+            // Crear corazón flotante al moverse
+            const h = document.createElement("div");
+            h.classList.add("heartFloat");
+            h.innerHTML = "💖";
+            h.style.left = (newX + 5) + "px";
+            h.style.top = (newY + 5) + "px";
+            document.body.appendChild(h);
+            setTimeout(()=>h.remove(), 1000);
+        }
+
+        // Verificar meta
+        const mazeRect = maze.getBoundingClientRect();
+        const goalRect = goal.getBoundingClientRect();
+        const pRect = {
+            left: player.offsetLeft + mazeRect.left,
+            top: player.offsetTop + parseInt(player.style.height)/2 + mazeRect.top,
+            right: player.offsetLeft + parseInt(player.style.width)/2 + mazeRect.left,
+            bottom: player.offsetTop + parseInt(player.style.height)/2 + mazeRect.top
+        };
+
+        if(!(pRect.right < goalRect.left || pRect.left > goalRect.right ||
+             pRect.bottom < goalRect.top || pRect.top > goalRect.bottom)){
+            mazeMsg.innerHTML = "💚 ¡Has llegado a tu amor! Cada paso valió la pena 💖";
+            crearFuegosArtificiales(window.innerWidth/2, window.innerHeight/2);
+            document.onkeydown = null;
+            document.querySelectorAll(".controlBtn").forEach(btn => btn.disabled = true);
+        }
+    }
+
+    // Teclado
+    document.onkeydown = function(e){
+        switch(e.key){
+            case "ArrowUp": mover(0, -speed); break;
+            case "ArrowDown": mover(0, speed); break;
+            case "ArrowLeft": mover(-speed, 0); break;
+            case "ArrowRight": mover(speed, 0); break;
+        }
+    };
+
+    // Controles táctiles
+    document.querySelectorAll(".controlBtn").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+            const dir = btn.dataset.dir;
+            switch(dir){
+                case "up": mover(0, -speed); break;
+                case "down": mover(0, speed); break;
+                case "left": mover(-speed, 0); break;
+                case "right": mover(speed, 0); break;
+            }
+        });
+    });
+
+    // Dificultad
+    document.getElementById("easyBtn").onclick = ()=>crearMaze("easy");
+    document.getElementById("hardBtn").onclick = ()=>{
+        if(confirm("¡Dificultad alta! ¿Quieres intentarlo?")){
+            crearMaze("hard");
+        }
+    };
+
+    // Inicializa con fácil
+    crearMaze("easy");
+}
+
+// Función para fuegos artificiales
+function crearFuegosArtificiales(x, y){
+    for(let i=0;i<25;i++){
+        const f = document.createElement("div");
+        f.classList.add("heartFloat");
+        f.innerHTML = "💕";
+        f.style.position = "fixed";
+        f.style.left = x + (Math.random()*100 -50) + "px";
+        f.style.top = y + (Math.random()*100 -50) + "px";
+        f.style.fontSize = (12+Math.random()*12)+"px";
+        f.style.zIndex = 9999;
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(), 1500);
+    }
+}
+
 </script>
+
 
 </body>
 </html>
