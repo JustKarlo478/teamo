@@ -59,7 +59,6 @@ button:hover {
     transform: scale(1.06);
 }
 button::after {
-    /* brillo */
     content: "";
     position: absolute;
     top: -100%;
@@ -139,6 +138,32 @@ button:hover::after {
     from { opacity: 0; transform: translateY(25px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+/*************** ⭐ NUEVO — Constelación del Amor *****************/
+.constelacionCanvas {
+    width: 100%;
+    height: 300px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.stella {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: parpadeo 2s infinite;
+}
+
+@keyframes parpadeo {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
 </style>
 </head>
 
@@ -159,8 +184,11 @@ button:hover::after {
 <button onclick="mostrarSorpresa2()">💞 Sorpresa 2</button>
 <button onclick="toggleNight()">🌙 Modo noche</button>
 
-<!-- 🌟 NUEVO BOTÓN ROMÁNTICO -->
+<!-- NUEVO -->
 <button onclick="mostrarPoema()">💖 Modo Poema Infinito</button>
+
+<!-- ⭐ NUEVO — Constelación del Amor -->
+<button onclick="mostrarConstelacion()">✨ Constelación del Amor</button>
 
 <!-- TARJETAS -->
 <div id="carta" class="card"></div>
@@ -170,9 +198,10 @@ button:hover::after {
 <div id="winScreen" class="card"></div>
 <div id="sorpresa1" class="card"></div>
 <div id="sorpresa2" class="card"></div>
-
-<!-- NUEVO — POEMA INFINITO -->
 <div id="poema" class="card"></div>
+
+<!-- NUEVA TARJETA -->
+<div id="constelacion" class="card"></div>
 
 <footer style="margin: 40px 0; opacity: 0.8;">Hecho con amor para ti 💚</footer>
 
@@ -352,6 +381,7 @@ function mensajeRandom() {
     const elemento = document.getElementById("msgRandom");
     elemento.innerText = frases[Math.floor(Math.random() * frases.length)];
 }
+
 /******************** Sorpresa 2 ********************/
 function mostrarSorpresa2() {
     mostrar("sorpresa2");
@@ -395,7 +425,6 @@ function mostrarPoema() {
     poemaInterval = setInterval(() => {
         versoActual.innerHTML = versos[i];
 
-        // corazones flotando
         const heart = document.createElement("div");
         heart.classList.add("heartFloat");
         heart.innerHTML = "💖";
@@ -411,6 +440,55 @@ function mostrarPoema() {
 function detenerPoema() {
     clearInterval(poemaInterval);
     versoActual.innerHTML = "Poema pausado… pero mi amor por ti nunca ✨💗";
+}
+
+/******************** ⭐ NUEVO — Constelación del Amor ********************/
+function mostrarConstelacion() {
+    mostrar("constelacion");
+
+    constelacion.innerHTML = `
+        <h2>✨ Constelación del Amor</h2>
+        <p style="font-size:1.3em;">
+            Cada estrella aquí representa un “te amo” que guardo por ti en mi cielo personal 💚
+        </p>
+        <div class="constelacionCanvas" id="canvasConst"></div>
+    `;
+
+    generarEstrellas();
+}
+
+function generarEstrellas() {
+    const canvas = document.getElementById("canvasConst");
+    canvas.innerHTML = "";
+
+    const mensaje = "TE AMO";
+    const ancho = canvas.offsetWidth;
+    const alto = canvas.offsetHeight;
+
+    for (let i = 0; i < 40; i++) {
+        const star = document.createElement("div");
+        star.classList.add("stella");
+        star.style.left = Math.random() * ancho + "px";
+        star.style.top = Math.random() * alto + "px";
+        canvas.appendChild(star);
+    }
+
+    const letras = mensaje.split("");
+    let xBase = 40;
+
+    letras.forEach((l, index) => {
+        for (let i = 0; i < 8; i++) {
+            const star = document.createElement("div");
+            star.classList.add("stella");
+            star.style.left = xBase + (Math.random()*30) + "px";
+            star.style.top = 80 + (Math.random()*40) + "px";
+            star.style.background = "#ffb7d5";
+            star.style.animationDuration = (1 + Math.random()) + "s";
+
+            canvas.appendChild(star);
+        }
+        xBase += 60;
+    });
 }
 
 /******************** Extras ********************/
